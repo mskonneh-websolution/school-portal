@@ -165,15 +165,28 @@
         font-size: 2rem;
       }
     }
+    .logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-area img.logo {
+  height: 40px;
+  width: auto;
+}
+    
   </style>
 </head>
 <body>
 
   <!-- 🔝 HEADER / NAV -->
   <header>
-    <div><strong>My School</strong>
-     
-    </div>
+  <div class="logo-area">
+    <img src="/school-portal/images/logo.png" alt="School Logo" class="logo">
+    <span class="school-name">My School</span>
+  </div>
+
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
