@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - My School</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+
+    header {
+      background-color: #003366;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    .main-heading {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background-color: #e3eaf0;
+    }
+
+    .main-heading h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #003366;
+    }
+
+    /* 🖼 Carousel */
+    .carousel-container {
+      overflow: hidden;
+      max-width: 100%;
+      position: relative;
+      height: 300px;
+      margin-bottom: 40px;
+    }
+
+    .carousel {
+      display: flex;
+      width: 300%;
+      animation: slide 12s infinite;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0%); }
+      33% { transform: translateX(0%); }
+      40% { transform: translateX(-100%); }
+      66% { transform: translateX(-100%); }
+      73% { transform: translateX(-200%); }
+      100% { transform: translateX(-200%); }
+    }
+
+    .gallery-section {
+      padding: 20px 40px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .photo-card {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .photo-card img {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .photo-card p {
+      margin-top: 10px;
+      font-weight: 500;
+      color: #003366;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Lightbox */
+    #photoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #photoModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #0055aa;
+    }
+
+    .load-more {
+      text-align: center;
+    }
+  </style>
+
+    <script src="js/theme.js"></script> <!-- ✅ LOADS THE FUNCTION -->
+</head>
+<body>
+
+  <!-- 🔝 NAVIGATION -->
+  <header>
+    <div><strong>My School</strong></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+
+     <!-- ✅ Toggle Button -->
+  <button class="toggle-btn" onclick="toggleTheme()">🌞 / 🌙</button>
+  </header>
+
+  <!-- 📑 PAGE TITLE -->
+  <section class="main-heading">
+    <h1>Our Photo Gallery</h1>
+  </section>
+
+  <!-- 🖼 SLIDESHOW -->
+  <div class="carousel-container">
+    <div class="carousel">
+      <img src="https://picsum.photos/id/1015/1200/300" alt="Slide 1">
+      <img src="https://picsum.photos/id/1039/1200/300" alt="Slide 2">
+      <img src="https://picsum.photos/id/1042/1200/300" alt="Slide 3">
+    </div>
+  </div>
+
+  <!-- 📷 PHOTO GRID -->
+  <div class="gallery-section">
+    <div class="photo-grid" id="photoGallery">
+      <div class="photo-card gallery-item">
+        <img src="https://picsum.photos/id/1021/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Graduation Ceremony</p>
+      </div>
+      <div class="photo-card gallery-item">
+        <img src="https://picsum.photos/id/1033/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Inter-House Sports</p>
+      </div>
+      <div class="photo-card gallery-item">
+        <img src="https://picsum.photos/id/1056/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Cultural Dance</p>
+      </div>
+      <div class="photo-card gallery-item">
+        <img src="https://picsum.photos/id/1069/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Science Exhibition</p>
+      </div>
+      <div class="photo-card gallery-item">
+        <img src="https://picsum.photos/id/1084/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>School Art Fair</p>
+      </div>
+      <div class="photo-card gallery-item">
+        <img src="https://picsum.photos/id/1081/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Computer Lab</p>
+      </div>
+
+      <!-- 🔽 HIDDEN ITEMS -->
+      <div class="photo-card gallery-item hidden">
+        <img src="https://picsum.photos/id/1083/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Library Session</p>
+      </div>
+      <div class="photo-card gallery-item hidden">
+        <img src="https://picsum.photos/id/1080/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>Drama Club Performance</p>
+      </div>
+      <div class="photo-card gallery-item hidden">
+        <img src="https://picsum.photos/id/1074/400/250" onclick="openPhotoLightbox(this.src)">
+        <p>PTA Meeting</p>
+      </div>
+    </div>
+
+    <!-- 🔘 LOAD MORE BUTTON -->
+    <div class="load-more">
+      <button id="loadMore" onclick="showMore()">Load More</button>
+    </div>
+  </div>
+
+  <!-- 🔍 PHOTO LIGHTBOX -->
+  <div id="photoModal">
+    <span class="close-btn" onclick="closePhotoLightbox()">×</span>
+    <img id="lightboxPhoto" src="">
+  </div>
+
+  <footer>
+    <p>&copy; 2025 My School. All rights reserved.</p>
+  </footer>
+
+  <!-- 📜 SCRIPT -->
+  <script>
+    function openPhotoLightbox(src) {
+      document.getElementById("lightboxPhoto").src = src;
+      document.getElementById("photoModal").style.display = "flex";
+    }
+
+    function closePhotoLightbox() {
+      document.getElementById("photoModal").style.display = "none";
+    }
+
+    function showMore() {
+      const hidden = document.querySelectorAll(".gallery-item.hidden");
+      hidden.forEach(item => item.classList.remove("hidden"));
+      document.getElementById("loadMore").style.display = "none";
+    }
+  </script>
+</body>
+</html>

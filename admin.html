@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel - Student Search</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f7fa;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-card {
+      background: white;
+      margin: 40px auto;
+      max-width: 600px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0055aa;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #003f80;
+    }
+
+    #searchSection {
+      display: none;
+    }
+
+    .student-card {
+      margin-top: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .student-card img {
+      width: 120px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    #printBtn {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="register.html">📝 Register</a></li>
+        <li><a href="admin.html">🔐 Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="form-card">
+    <form id="adminLoginForm">
+      <h2>Admin Login</h2>
+      <input type="email" id="adminEmail" placeholder="Admin Email" required />
+      <input type="password" id="adminPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p id="loginMsg" style="text-align:center; color: red; margin-top: 10px;"></p>
+    </form>
+
+    <div id="searchSection">
+      <h2>Search Student Record</h2>
+      <input type="text" id="searchRegNo" placeholder="Enter Registration No" />
+      <button onclick="searchStudent()">Search</button>
+      <div id="studentResult"></div>
+      <button id="printBtn" onclick="window.print()">🖨️ Print / Save</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 My School. All rights reserved.</p>
+  </footer>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

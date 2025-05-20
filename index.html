@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to My School</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme.js"></script>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --text: #222;
+      --primary: #003366;
+      --card: #fff;
+      --highlight: #ffcc00;
+    }
+
+    html[data-theme='dark'] {
+      --bg: #121212;
+      --text: #f1f1f1;
+      --card: #1e1e1e;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .toggle-btn {
+      background: white;
+      color: #333;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: url('https://picsum.photos/id/1040/1200/500') center/cover no-repeat;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: var(--primary);
+    }
+
+    .about {
+      text-align: center;
+    }
+
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+      height: 300px;
+      margin: 30px auto;
+      max-width: 100%;
+    }
+
+    .carousel {
+      display: flex;
+      width: 300%;
+      animation: slide 12s infinite;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(0); }
+      40% { transform: translateX(-100%); }
+      66% { transform: translateX(-100%); }
+      73% { transform: translateX(-200%); }
+      100% { transform: translateX(-200%); }
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 40px;
+    }
+
+    a.button {
+      background: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    a.button:hover {
+      background: #0055aa;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔝 HEADER / NAV -->
+  <header>
+    <div><strong>My School</strong></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <button class="toggle-btn" onclick="toggleTheme()">🌞 / 🌙</button>
+  </header>
+
+  <!-- 🎯 HERO SECTION -->
+  <div class="hero">
+    <h1>Welcome to My School</h1>
+    <p>A place where excellence meets opportunity.</p>
+  </div>
+
+  <!-- 🧱 FEATURE SECTION -->
+  <section class="section">
+    <h2 style="text-align:center;">Explore Our Offerings</h2>
+    <div class="features">
+      <div class="card">
+        <h3>Admissions</h3>
+        <p>Join a thriving learning community. Applications are open for all grades.</p>
+      </div>
+      <div class="card">
+        <h3>Modern Facilities</h3>
+        <p>Smart classrooms, digital labs, libraries and tech-enabled sports grounds.</p>
+      </div>
+      <div class="card">
+        <h3>Events</h3>
+        <p>We host cultural, academic and sporting events that empower students.</p>
+      </div>
+      <div class="card">
+        <h3>Courses</h3>
+        <p>Diverse programs in sciences, arts, and technology aligned with global standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🏫 ABOUT SNIPPET -->
+  <section class="section about">
+    <h2>About Us</h2>
+    <p>With over two decades of educational excellence, we are committed to nurturing young minds and building the future.</p>
+    <a class="button" href="about.html">Learn More</a>
+  </section>
+
+  <!-- 🖼 SCHOOL PHOTO SLIDESHOW -->
+  <div class="carousel-container">
+    <div class="carousel">
+      <img src="https://picsum.photos/id/1011/1200/300" alt="School View">
+      <img src="https://picsum.photos/id/1012/1200/300" alt="Students">
+      <img src="https://picsum.photos/id/1013/1200/300" alt="Teachers">
+    </div>
+  </div>
+
+  <!-- 📞 FOOTER -->
+  <footer>
+    <p>&copy; 2025 My School. All rights reserved.<br>Contact us: info@myschool.com | +123 456 7890</p>
+  </footer>
+
+</body>
+</html>

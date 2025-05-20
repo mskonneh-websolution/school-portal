@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration - My School</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f7fa;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .toggle-btn {
+      background: white;
+      color: #333;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .form-card {
+      background: white;
+      display: flex;
+      gap: 20px;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+    }
+    .form-left {
+      flex: 1;
+    }
+    .form-right {
+      width: 200px;
+      text-align: center;
+    }
+    #capturedImage {
+      width: 100%;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    video {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 14px;
+      width: 100%;
+      background: #0055aa;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #003f80;
+    }
+    #successMsg {
+      text-align: center;
+      margin-top: 15px;
+      color: green;
+    }
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    @media(max-width: 768px) {
+      .form-card {
+        flex-direction: column;
+      }
+      .form-right {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔝 Header -->
+  <header>
+    <div><strong>My School</strong></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="register.html" class="active">Register</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <button class="toggle-btn" onclick="toggleTheme()">🌞 / 🌙</button>
+  </header>
+
+  <!-- 📝 Form Layout -->
+  <main>
+    <div class="form-card">
+      <!-- Right side photo + camera -->
+      <div class="form-right">
+        <img id="capturedImage" src="https://via.placeholder.com/150" alt="Passport Preview" />
+        <video id="camera" autoplay playsinline></video>
+        <button type="button" onclick="capturePhoto()">📷 Capture</button>
+      </div>
+
+      <!-- Left side form fields -->
+      <div class="form-left">
+        <h2>Student Registration</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" required />
+          </div>
+          <div class="form-group">
+            <label for="dateofbirth">Date of Birth</label>
+            <input type="date" id="dateofbirth" required />
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <input type="text" id="gender" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" required />
+          </div>
+          <div class="form-group">
+            <label for="course">Course</label>
+            <select id="course" required>
+              <option value="">-- Select --</option>
+              <option value="Science">Science</option>
+              <option value="Arts">Arts</option>
+              <option value="Technology">Technology</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="document">Upload Document</label>
+            <input type="file" id="document" accept=".pdf,.doc,.docx" />
+          </div>
+          <button type="submit">Submit Application</button>
+          <p id="successMsg"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🔻 Footer -->
+  <footer>
+    <p>&copy; 2025 My School. All rights reserved.</p>
+  </footer>
+
+ <script>
+  const video = document.getElementById("camera");
+  const capturedImage = document.getElementById("capturedImage");
+  let photoBlob = null;
+
+  // 🎥 Start camera
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => video.srcObject = stream)
+    .catch(err => alert("❌ Camera access blocked."));
+
+  // 📸 Capture
+  function capturePhoto() {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+    canvas.toBlob(blob => {
+      photoBlob = blob;
+      capturedImage.src = URL.createObjectURL(blob);
+    }, "image/jpeg");
+  }
+
+  // ☁️ Upload to Cloudinary
+  async function uploadToCloudinary(file, folder = "schoolportal") {
+    const url = "https://api.cloudinary.com/v1_1/dwxf6hrxh/auto/upload";
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "student_portal"); // 🔁 Set this in Cloudinary
+    formData.append("folder", folder);
+
+    const res = await fetch(url, {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+    return data.secure_url;
+  }
+
+  // 📤 Handle form submission
+  document.getElementById("registerForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const reg_no = "REG-" + Math.floor(Math.random() * 100000);
+    const fullname = document.getElementById("fullname").value;
+    const dateofbirth = document.getElementById("dateofbirth").value;
+    const gender = document.getElementById("gender").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const course = document.getElementById("course").value;
+    const documentFile = document.getElementById("document").files[0];
+
+    if (!photoBlob) {
+      alert("❗ Please capture a photo before submitting.");
+      return;
+    }
+
+    try {
+      // ✅ Upload photo
+      const photo_url = await uploadToCloudinary(photoBlob, "photos");
+      let document_url = "Not uploaded";
+
+      // ✅ Upload document (if available)
+      if (documentFile) {
+        document_url = await uploadToCloudinary(documentFile, "documents");
+      }
+
+      // ✅ Send to SheetDB
+      const data = {
+        reg_no,
+        fullname,
+        dateofbirth,
+        gender,
+        email,
+        phone,
+        address,
+        course,
+        photo_url,
+        document_url
+      };
+
+      const res = await fetch("https://sheetdb.io/api/v1/hzin7qrg1qy6y?sheet=students", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data })
+      });
+
+      const result = await res.json();
+      document.getElementById("successMsg").textContent = "✅ Registration Successful! Reg No: " + reg_no;
+      this.reset();
+      capturedImage.src = "https://via.placeholder.com/150";
+      photoBlob = null;
+    } catch (err) {
+      console.error(err);
+      document.getElementById("successMsg").textContent = "❌ Submission Failed";
+    }
+  });
+</script>
+
+</body>
+</html>
