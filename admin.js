@@ -1,10 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("adminLoginForm");
-  const searchBox = document.getElementById("searchSection");
-  const resultDiv = document.getElementById("studentResult");
-  const printBtn = document.getElementById("printBtn");
 
-  // 🔐 Admin Login
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("adminEmail").value.trim();
@@ -14,13 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = await res.json();
 
     if (data.length > 0) {
-      loginForm.style.display = "none";
-      searchBox.style.display = "block";
-      document.getElementById("loginMsg").textContent = "✅ Login successful";
+      document.getElementById("loginMsg").textContent = "✅ Login successful!";
+      // You can show search form or redirect here
     } else {
       document.getElementById("loginMsg").textContent = "❌ Invalid credentials.";
     }
   });
+});
+
 
   // 🔎 Student Search
   window.searchStudent = async () => {
