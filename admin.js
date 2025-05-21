@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultDiv = document.getElementById("studentResult");
   const printBtn = document.getElementById("printBtn");
 
-  // 🔐 Admin login
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("adminEmail").value.trim();
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🔍 Search student by Reg No
   window.searchStudent = async () => {
     const regNo = document.getElementById("searchRegNo").value.trim();
     resultDiv.innerHTML = '';
@@ -58,7 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <p><strong>Phone:</strong> ${s.phone}</p>
             <p><strong>Address:</strong> ${s.address}</p>
             <p><strong>Course:</strong> ${s.course}</p>
-            ${s.document_url && s.document_url !== "Pending" ? `<a class="doc-link" href="${s.document_url}" target="_blank">📎 View Document</a>` : ''}
+            ${s.document_url && s.document_url !== "Pending"
+              ? `<a class="doc-link" href="${s.document_url}" target="_blank">📎 View Document</a>`
+              : '<p><em>No document uploaded.</em></p>'}
           </div>
         `;
         printBtn.style.display = "inline-block";
