@@ -1,35 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("adminLoginForm");
-  const searchSection = document.getElementById("searchSection");
-  const resultDiv = document.getElementById("studentResult");
-  const printBtn = document.getElementById("printBtn");
-
-  // ✅ Admin login
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("adminEmail").value.trim();
-    const password = document.getElementById("adminPassword").value.trim();
-
-    try {
-      const res = await fetch(`https://sheetdb.io/api/v1/hzin7qrg1qy6y/search?sheet=admins&email=${email}&password=${password}`);
-      const data = await res.json();
-
-      if (data.length > 0) {
-        // ✅ Login successful: show search section
-        loginForm.style.display = "none";
-        searchSection.style.display = "block";
-        document.getElementById("loginMsg").textContent = "✅ Login successful";
-        document.getElementById("loginMsg").style.color = "green";
-      } else {
-        // ❌ Invalid
-        document.getElementById("loginMsg").textContent = "❌ Invalid credentials";
-        document.getElementById("loginMsg").style.color = "red";
-      }
-    } catch (err) {
-      console.error(err);
-      document.getElementById("loginMsg").textContent = "⚠️ Error during login.";
-    }
-  });
 
   // ✅ Search student
   window.searchStudent = async () => {
